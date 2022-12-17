@@ -1,0 +1,47 @@
+plugins {
+	id 'org.springframework.boot' version '2.4.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id "com.microsoft.azure.azurewebapp" version "1.1.0"
+}
+
+group = 'com.java.spring'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+azurewebapp {
+	subscription = '32b58b1e-e7c5-4b2d-ab4b-b9961da67ca4'
+	resourceGroup = 'resource-001'
+	appName = 'lorem-ipsum-msvc'
+	pricingTier = 'P1v2'
+	region = 'westus'
+	runtime {
+		os = 'Linux'
+		webContainer = 'Tomcat 9.0'
+		javaVersion = 'Java 8'
+	}
+	auth {
+		type = 'azure_cli' // support azure_cli, oauth2, device_code and service_principal
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+//	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
